@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/cd-Roid/react-todo-app#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-json": "^1.0.0",
     "mongodb": "^3.6.4"
