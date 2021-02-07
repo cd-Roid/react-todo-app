@@ -9,7 +9,7 @@ const { ObjectId } = require('mongodb');
 const app = express();
 const jsonParser = bodyParser.json();
 const PORT = 3001;
-const uri = `mongodb+srv://cd-RoiD:${process.env.MONGO_PASSWORD}@cluster0.cpt7m.mongodb.net/Todos?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.cpt7m.mongodb.net/Todos?retryWrites=true&w=majority`;
 
 
  MongoClient.connect(uri,{ useUnifiedTopology: true }, async function(err, client) {   
@@ -62,7 +62,6 @@ app.delete('/:id', async (req , res)=>{
 })
 
 app.use(_);
-app.use(jsonParser);
 app.listen(PORT, () => {
   console.log(`Todo Backend listening at http://localhost:${PORT}`);
 });
