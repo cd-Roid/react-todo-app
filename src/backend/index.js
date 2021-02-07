@@ -1,5 +1,6 @@
 const express = require('express');
 const  _ = require('express-json');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
@@ -60,7 +61,7 @@ app.delete('/:id', async (req , res)=>{
         throw error;
     }
 })
-
+app.use(cors);
 app.use(_);
 app.listen(PORT, () => {
   console.log(`Todo Backend listening at http://localhost:${PORT}`);
