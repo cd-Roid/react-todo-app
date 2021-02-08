@@ -10,7 +10,7 @@ const {text, done} = todo.todo;
     return (
         <div>
             <div>{text}</div>
-            <input type="checkbox"></input>
+            <input type="checkbox" checked={done}></input>
         </div>
     )
 };
