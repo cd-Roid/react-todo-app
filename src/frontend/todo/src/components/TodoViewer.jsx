@@ -1,23 +1,15 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
 
 
 
 
-function TodoViewer() {
 
-    const [todo, setTodo] = useState([]);
-
-const fetchTodos = async () =>{
-    const res = await fetch('http://localhost:3001');
-    const data = await res.json();
-    console.log(data);
-}
-
+function TodoViewer(todo) {
+const {text, done} = todo.todo;
 
     return (
         <div>
-            <div>{todo}</div>
+            <div>{text}</div>
             <input type="checkbox"></input>
         </div>
     )
