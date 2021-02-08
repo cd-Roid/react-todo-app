@@ -1,9 +1,8 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 
 
 
-function TodoViewer(todo, deleteTodo) {
-
+function TodoViewer(todo) {
 const {text, done, _id} = todo.todo;
 const [doneStatus, setDone] = useState(done);    
 
@@ -22,11 +21,24 @@ const setDoneStatus = async () => {
     setDone(!done); 
 }
 
+useEffect(()=>{
+    console.log("use Effect running in Viewer");
+},[doneStatus])
+
+
+const  deleteTodo = async ()  => {
+    const {_id} = todo.todo;
+    await fetch(`http://localhost:3001/${_id}`, {
+        method: 'DELETE',
+        mode: 'cors',
+    });
+  }
+
     return (
         <div>
             <div>{text}</div>
             <input type="checkbox" checked={done} onClick={setDoneStatus}></input>
-            <i onClick={()=>deleteTodo(_id)}>Delete</i>
+            <i onClick={deleteTodo}>Delete</i>
         </div>
     )
 };
