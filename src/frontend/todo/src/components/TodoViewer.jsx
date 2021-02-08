@@ -1,16 +1,9 @@
 import React from 'react';
 
 
-async function deleteTodo(id) {
-    await fetch(`http://localhost:3001/${id}`, {
-        method: 'DELETE',
-        mode: 'cors',
-    });
-
-}
 
 
-function TodoViewer(todo) {
+function TodoViewer(todo, deleteTodo) {
 const {text, done, _id} = todo.todo;
 
     return (
