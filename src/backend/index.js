@@ -49,10 +49,10 @@ app.post('/', jsonParser,async (req , res)=>{
 })  
 
 
-app.put('/:id', async (req , res)=>{
+app.put('/:id', jsonParser, async (req , res)=>{
     try {
-
-        await db.collection('todos').findOneAndUpdate({_id: ObjectId(req.params.id)},{$set:{'done':false}});
+        const data = req.body.done;
+        await db.collection('todos').findOneAndUpdate({_id: ObjectId(req.params.id)},{$set:{'done':data}});
         res.json({desc: "Successfully updated"});
     } catch (error) {
         throw error;
