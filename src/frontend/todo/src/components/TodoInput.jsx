@@ -1,9 +1,11 @@
 import React from 'react'
-import {useState} from 'react';
+import {useState, } from 'react';
 
 
 
 function TodoInput() {
+
+ 
 
     const [newTodo, setNewTodo] = useState('');
 
@@ -19,6 +21,7 @@ function TodoInput() {
             body: JSON.stringify(data)
 
         })
+        setNewTodo(' ');
     } 
 
     
