@@ -6,24 +6,13 @@ import {useState, useEffect} from 'react';
 
 function App() {
 
-  const [todo, setTodo] = useState([]);
-
+  const [todos, setTodo] = useState([]);  
+  
   const fetchTodos = async () => { 
       const res = await fetch('http://localhost:3001');
       const data = await res.json();
       setTodo(data);
   }
-  
-const  deleteTodo = async (id)  => {
-  await fetch(`http://localhost:3001/${id}`, {
-      method: 'DELETE',
-      mode: 'cors',
-  });
-
-  const createTodo = async () => {
-    
-  }
-}
 
   useEffect(()=>{
       console.log("use Effect running");
@@ -34,7 +23,7 @@ const  deleteTodo = async (id)  => {
   return (
     <div>
       {
-        todo.map(todo => <TodoViewer todo ={ todo } deleteTodo = {deleteTodo} />)
+        todos.map(todo => <TodoViewer todo ={ todo } key={todo._id}/>)
       }
       <TodoInput/>
     </div>
