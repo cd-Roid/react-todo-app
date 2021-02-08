@@ -8,8 +8,12 @@ const { ObjectId } = require('mongodb');
 
 
 const app = express();
+
 const jsonParser = bodyParser.json();
 const PORT = 3001;
+
+
+
 const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.cpt7m.mongodb.net/Todos?retryWrites=true&w=majority`;
 
 
@@ -20,6 +24,9 @@ const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PAS
 
   db = client.db('Todos');
 });
+
+
+app.use(cors());
 
 app.get('/', async (req , res)=>{
     try {
@@ -42,10 +49,10 @@ app.post('/', jsonParser,async (req , res)=>{
 })  
 
 
-app.put('/:id', async (req , res)=>{
+app.put('/:id', jsonParser, async (req , res)=>{
     try {
-
-        await db.collection('todos').findOneAndUpdate({_id: ObjectId(req.params.id)},{$set:{'done':false}});
+        const data = req.body.done;
+        await db.collection('todos').findOneAndUpdate({_id: ObjectId(req.params.id)},{$set:{'done':data}});
         res.json({desc: "Successfully updated"});
     } catch (error) {
         throw error;
@@ -61,7 +68,7 @@ app.delete('/:id', async (req , res)=>{
         throw error;
     }
 })
-app.use(cors);
+
 app.use(_);
 app.listen(PORT, () => {
   console.log(`Todo Backend listening at http://localhost:${PORT}`);
